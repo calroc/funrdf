@@ -1,0 +1,30 @@
+2010-09-12 15:01:37 Running command: "['C:\\Python26\\pythonw.exe', 'C:\\Program Files\\Google\\google_appengine\\dev_appserver.py', '--admin_console_server=', '--port=8080', u'C:\\Users\\Owner\\Desktop\\Pete\\funrdf\\funrdf']"
+C:\Program Files\Google\google_appengine\google\appengine\tools\appcfg.py:41: DeprecationWarning: the sha module is deprecated; use the hashlib module instead
+  import sha
+C:\Program Files\Google\google_appengine\google\appengine\tools\dev_appserver_login.py:33: DeprecationWarning: the md5 module is deprecated; use hashlib instead
+  import md5
+WARNING  2010-09-12 22:02:05,007 datastore_file_stub.py:657] Could not read datastore data from c:\users\owner\appdata\local\temp\dev_appserver.datastore
+WARNING  2010-09-12 22:02:05,430 dev_appserver.py:3637] Could not initialize images API; you are likely missing the Python "PIL" module. ImportError: No module named _imaging
+INFO     2010-09-12 22:02:05,571 dev_appserver_main.py:431] Running application funrdf on port 8080: http://localhost:8080
+WARNING  2010-09-12 22:03:13,127 py_zipimport.py:103] Can't open zipfile C:\Python26\lib\site-packages\setuptools-0.6c11-py2.6.egg-info: IOError: [Errno 13] file not accessible: 'C:\\Python26\\lib\\site-packages\\setuptools-0.6c11-py2.6.egg-info'
+INFO     2010-09-12 22:03:15,227 dev_appserver.py:3275] "GET / HTTP/1.1" 200 -
+INFO     2010-09-12 22:03:15,252 dev_appserver_index.py:212] Updating C:\Users\Owner\Desktop\Pete\funrdf\funrdf\index.yaml
+INFO     2010-09-12 22:03:17,647 dev_appserver.py:3275] "GET /favicon.ico HTTP/1.1" 404 -
+INFO     2010-09-12 22:26:14,137 dev_appserver.py:3275] "GET / HTTP/1.1" 200 -
+INFO     2010-09-12 22:26:16,371 dev_appserver.py:3275] "GET /favicon.ico HTTP/1.1" 404 -
+WARNING  2010-09-12 22:26:29,776 py_zipimport.py:103] Can't open zipfile C:\Python26\lib\site-packages\setuptools-0.6c11-py2.6.egg-info: IOError: [Errno 13] file not accessible: 'C:\\Python26\\lib\\site-packages\\setuptools-0.6c11-py2.6.egg-info'
+C:\Program Files\Google\google_appengine\google\appengine\tools\dev_appserver.py:1790: DeprecationWarning: the md5 module is deprecated; use hashlib instead
+  description)
+INFO     2010-09-12 22:26:37,766 dev_appserver.py:3275] "GET /_ah/admin HTTP/1.1" 302 -
+INFO     2010-09-12 22:26:41,917 dev_appserver.py:3275] "GET /_ah/admin/datastore HTTP/1.1" 200 -
+INFO     2010-09-12 22:26:44,948 dev_appserver.py:3275] "GET /_ah/admin/images/google.gif HTTP/1.1" 200 -
+INFO     2010-09-12 22:26:48,677 dev_appserver.py:3275] "GET /favicon.ico HTTP/1.1" 404 -
+INFO     2010-09-12 22:27:51,852 dev_appserver.py:3275] "GET /_ah/admin/interactive HTTP/1.1" 200 -
+INFO     2010-09-12 22:27:55,289 dev_appserver.py:3275] "GET /_ah/admin/images/google.gif HTTP/1.1" 200 -
+INFO     2010-09-12 22:27:59,078 dev_appserver.py:3275] "GET /favicon.ico HTTP/1.1" 404 -
+INFO     2010-09-12 22:28:11,433 dev_appserver.py:3275] "POST /_ah/admin/interactive/execute HTTP/1.1" 200 -
+INFO     2010-09-12 22:28:14,171 dev_appserver.py:3275] "GET /favicon.ico HTTP/1.1" 404 -
+INFO     2010-09-12 22:28:22,539 dev_appserver.py:3275] "GET /favicon.ico HTTP/1.1" 404 -
+INFO     2010-09-12 22:28:26,588 dev_appserver.py:3275] "GET /favicon.ico HTTP/1.1" 404 -
+2010-09-12 15:28:39 (Process exited with code -1)
+
