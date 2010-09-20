@@ -7,9 +7,9 @@ class URIref(db.Model):
 
 
 class Fact(db.Model):
-    subject = db.KeyProperty()
-    predicate = db.KeyProperty()
-    object_ = db.KeyProperty()
+    subject = db.ReferenceProperty(URIref, collection_name='subject_set')
+    predicate = db.ReferenceProperty(URIref, collection_name='predicate_set')
+    object_ = db.ReferenceProperty(URIref, collection_name='object_set')
 
 
 def knowFact(subject, predicate, object_):
