@@ -6,6 +6,9 @@ api_version: 1
 handlers:
 - url: /_ah/xmpp/message/chat/
   script: chatty.py
+- url: /remote_api
+  script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
+  login: admin
 - url: .*
   script: main.py
 
