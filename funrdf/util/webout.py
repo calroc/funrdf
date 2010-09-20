@@ -1,5 +1,46 @@
 
 
+CLOSING_TAGS =  set(['a', 'abbr', 'acronym', 'address', 'applet',
+            'b', 'bdo', 'big', 'blockquote', 'button',
+            'caption', 'center', 'cite', 'code',
+            'del', 'dfn', 'dir', 'div', 'dl',
+            'em', 'fieldset', 'font', 'form', 'frameset',
+            'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+            'i', 'iframe', 'ins', 'kbd', 'label', 'legend',
+            'map', 'menu', 'noframes', 'noscript', 'object',
+            'ol', 'optgroup', 'pre', 'q', 's', 'samp',
+            'script', 'select', 'small', 'span', 'strike',
+            'strong', 'style', 'sub', 'sup', 'table',
+            'textarea', 'title', 'tt', 'u', 'ul',
+            'var', 'body', 'colgroup', 'dd', 'dt', 'head',
+            'html', 'li', 'p', 'tbody','option', 
+            'td', 'tfoot', 'th', 'thead', 'tr'])
+
+
+NON_CLOSING_TAGS = set(['area', 'base', 'basefont', 'br', 'col', 'frame',
+            'hr', 'img', 'input', 'isindex', 'link',
+            'meta', 'param'])
+
+
+# whitespace-insensitive tags, determines pretty-print rendering
+LINE_BREAK_AFTER = NON_CLOSING_TAGS | set(['html','head','body',
+    'frameset','frame',
+    'title','script',
+    'table','tr','td','th','select','option',
+    'form',
+    'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+    ])
+
+
+# tags whose opening tag should be alone in its line
+ONE_LINE = set(['html','head','body',
+    'frameset'
+    'script',
+    'table','tr','td','th','select','option',
+    'form',
+    ])
+
+
 class TAG:
 
     def __init__(self, inner_HTML="", **attrs):
@@ -17,25 +58,7 @@ class TAG:
         w = res.append
 
         if self.__class__.__name__ != "TEXT":
-
-            w("<%s" % self.tag)
-
-            # attributes which will produce arg = "val"
-            res.extend(
-                ' %s="%s"' % (k, v)
-                for k, v in self.attrs.iteritems()
-                if not isinstance(v, bool)
-                )
-
-            # attributes with no argument
-            # if value is False, don't generate anything
-            # We test 'v is True' because we want only Booleans.
-            res.extend(
-                ' %s' % k
-                for k, v in self.attrs.iteritems()
-                if v is True
-                )
-            w(">")
+            res.extend(self._writeTag())
 
         if self.tag in ONE_LINE:
             w('\n')
@@ -55,6 +78,24 @@ class TAG:
             w(str(brother))
 
         return "".join(res)
+
+    def _writeTag(self):
+
+        yield "<%s" % self.tag
+
+        # Attributes which will produce arg = "val"
+        for k, v in self.attrs.iteritems():
+            if not isinstance(v, bool):
+                yield ' %s="%s"' % (k, v)
+
+        # Attributes with no argument
+        # If value is False, don't generate anything.
+        # We test 'v is True' because we want only Booleans.
+        for k, v in self.attrs.iteritems():
+            if v is True:
+                yield ' %s' % k
+
+        yield ">"
 
     def __le__(self, other):
         """Add a child"""
@@ -83,71 +124,12 @@ class TAG:
         else:
             raise ValueError, "Can't concatenate %s and instance" % other
 
-    def __mul__(self, n):
-        """Replicate self n times, with tag first : TAG * n"""
-        res = TAG()
-        res.tag = self.tag
-        res.inner_HTML = self.inner_HTML
-        res.attrs = self.attrs
-        for i in range(n - 1):
-            res += self
-        return res
-
-    def __rmul__(self, n):
-        """Replicate self n times, with n first : n * TAG"""
-        return self * n
-
-# list of tags, from the HTML 4.01 specification
-
-CLOSING_TAGS =  ['a', 'abbr', 'acronym', 'address', 'applet',
-            'b', 'bdo', 'big', 'blockquote', 'button',
-            'caption', 'center', 'cite', 'code',
-            'del', 'dfn', 'dir', 'div', 'dl',
-            'em', 'fieldset', 'font', 'form', 'frameset',
-            'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-            'i', 'iframe', 'ins', 'kbd', 'label', 'legend',
-            'map', 'menu', 'noframes', 'noscript', 'object',
-            'ol', 'optgroup', 'pre', 'q', 's', 'samp',
-            'script', 'select', 'small', 'span', 'strike',
-            'strong', 'style', 'sub', 'sup', 'table',
-            'textarea', 'title', 'tt', 'u', 'ul',
-            'var', 'body', 'colgroup', 'dd', 'dt', 'head',
-            'html', 'li', 'p', 'tbody','option', 
-            'td', 'tfoot', 'th', 'thead', 'tr']
-
-NON_CLOSING_TAGS = ['area', 'base', 'basefont', 'br', 'col', 'frame',
-            'hr', 'img', 'input', 'isindex', 'link',
-            'meta', 'param']
 
 # create the classes
-for tag in CLOSING_TAGS + NON_CLOSING_TAGS + ['text']:
+for tag in CLOSING_TAGS | NON_CLOSING_TAGS | set(['text']):
     exec("class %s(TAG): pass" % tag.upper())
+
     
-def concatinate(iterable):
-    """Return the concatenation of the instances in the iterable."""
-    it = list(iterable)
-    if it:
-        return reduce(lambda x,y:x+y, it)
-    else:
-        return ''
-
-# whitespace-insensitive tags, determines pretty-print rendering
-LINE_BREAK_AFTER = NON_CLOSING_TAGS + ['html','head','body',
-    'frameset','frame',
-    'title','script',
-    'table','tr','td','th','select','option',
-    'form',
-    'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-    ]
-
-# tags whose opening tag should be alone in its line
-ONE_LINE = ['html','head','body',
-    'frameset'
-    'script',
-    'table','tr','td','th','select','option',
-    'form',
-    ]
-
 if __name__ == '__main__':
     head = HEAD(TITLE('Test document'))
     body = BODY()
