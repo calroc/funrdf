@@ -24,6 +24,7 @@ NON_CLOSING_TAGS = set(['area', 'base', 'basefont', 'br', 'col', 'frame',
 
 # whitespace-insensitive tags, determines pretty-print rendering
 LINE_BREAK_AFTER = NON_CLOSING_TAGS | set(['html','head','body',
+    'div',
     'frameset','frame',
     'title','script',
     'table','tr','td','th','select','option',
@@ -134,6 +135,11 @@ if __name__ == '__main__':
     head = HEAD(TITLE('Test document'))
     body = BODY()
     body <= H1('This is a test document') + \
-            'First line' + BR() + 'Second line' + \
+            'First line' + BR() + \
+            'Second line' + BR() + \
             (DIV("Neat", Class='hairy') <= "Well!")
+
+    form = FORM(method="post", action="{% url profiles_create_profile %}")
+    form <= TABLE('\t{{ form }}\n')
+    body <= form
     print HTML(head + body)
