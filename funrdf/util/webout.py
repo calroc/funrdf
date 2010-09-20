@@ -1,43 +1,44 @@
 
 
 CLOSING_TAGS =  set(['a', 'abbr', 'acronym', 'address', 'applet',
-            'b', 'bdo', 'big', 'blockquote', 'button',
-            'caption', 'center', 'cite', 'code',
-            'del', 'dfn', 'dir', 'div', 'dl',
-            'em', 'fieldset', 'font', 'form', 'frameset',
-            'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-            'i', 'iframe', 'ins', 'kbd', 'label', 'legend',
-            'map', 'menu', 'noframes', 'noscript', 'object',
-            'ol', 'optgroup', 'pre', 'q', 's', 'samp',
-            'script', 'select', 'small', 'span', 'strike',
-            'strong', 'style', 'sub', 'sup', 'table',
-            'textarea', 'title', 'tt', 'u', 'ul',
-            'var', 'body', 'colgroup', 'dd', 'dt', 'head',
-            'html', 'li', 'p', 'tbody','option', 
-            'td', 'tfoot', 'th', 'thead', 'tr'])
+    'b', 'bdo', 'big', 'blockquote', 'button',
+    'caption', 'center', 'cite', 'code',
+    'del', 'dfn', 'dir', 'div', 'dl',
+    'em', 'fieldset', 'font', 'form', 'frameset',
+    'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+    'i', 'iframe', 'ins', 'kbd', 'label', 'legend',
+    'map', 'menu', 'noframes', 'noscript', 'object',
+    'ol', 'optgroup', 'pre', 'q', 's', 'samp',
+    'script', 'select', 'small', 'span', 'strike',
+    'strong', 'style', 'sub', 'sup', 'table',
+    'textarea', 'title', 'tt', 'u', 'ul',
+    'var', 'body', 'colgroup', 'dd', 'dt', 'head',
+    'html', 'li', 'p', 'tbody','option', 
+    'td', 'tfoot', 'th', 'thead', 'tr'])
 
 
 NON_CLOSING_TAGS = set(['area', 'base', 'basefont', 'br', 'col', 'frame',
-            'hr', 'img', 'input', 'isindex', 'link',
-            'meta', 'param'])
+    'hr', 'img', 'input', 'isindex', 'link',
+    'meta', 'param'])
 
 
 # whitespace-insensitive tags, determines pretty-print rendering
-LINE_BREAK_AFTER = NON_CLOSING_TAGS | set(['html','head','body',
+LINE_BREAK_AFTER = NON_CLOSING_TAGS | set(['html', 'head', 'body',
     'div',
-    'frameset','frame',
-    'title','script',
-    'table','tr','td','th','select','option',
+    'frameset', 'frame',
+    'title', 'script',
+    'table', 'tr', 'td', 'th', 'select', 'option',
     'form',
     'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
     ])
 
 
 # tags whose opening tag should be alone in its line
-ONE_LINE = set(['html','head','body',
+ONE_LINE = set(['html', 'head', 'body',
+    'div',
     'frameset'
     'script',
-    'table','tr','td','th','select','option',
+    'table', 'tr', 'td', 'th', 'select', 'option',
     'form',
     ])
 
@@ -58,7 +59,7 @@ class TAG:
         res = []
         w = res.append
 
-        if self.__class__.__name__ != "TEXT":
+        if self.tag != "text":
             res.extend(self._writeTag())
 
         if self.tag in ONE_LINE:
@@ -96,7 +97,10 @@ class TAG:
             if v is True:
                 yield ' %s' % k
 
-        yield ">"
+        if self.tag in NON_CLOSING_TAGS:
+            yield "/>"
+        else:
+            yield ">"
 
     def __le__(self, other):
         """Add a child"""
@@ -137,9 +141,9 @@ if __name__ == '__main__':
     body <= H1('This is a test document') + \
             'First line' + BR() + \
             'Second line' + BR() + \
-            (DIV("Neat", Class='hairy') <= "Well!")
+            (DIV("Neat", Class='hairy') <= "Well!\n")
 
     form = FORM(method="post", action="{% url profiles_create_profile %}")
-    form <= TABLE('\t{{ form }}\n')
+    form <= TABLE('{{ form }}\n')
     body <= form
     print HTML(head + body)
