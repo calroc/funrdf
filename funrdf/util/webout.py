@@ -1,4 +1,4 @@
-import cStringIO
+
 
 class TAG:
 
@@ -13,28 +13,28 @@ class TAG:
         self.brothers = []
     
     def __str__(self):
-        res = cStringIO.StringIO()
-        w = res.write
+        res = []
+        w = res.append
+
         if self.__class__.__name__ != "TEXT":
+
             w("<%s" % self.tag)
 
             # attributes which will produce arg = "val"
-            attr1 = [
-                k
+            res.extend(
+                ' %s="%s"' % (k, v)
                 for k, v in self.attrs.iteritems()
                 if not isinstance(v, bool)
-                ]
-            w("".join(
-                    ' %s="%s"' % (k, self.attrs[k])
-                    for k in attr1
-                    )
-              )
+                )
 
             # attributes with no argument
             # if value is False, don't generate anything
             # We test 'v is True' because we want only Booleans.
-            attr2 = [k for k, v in self.attrs.iteritems() if v is True]
-            w("".join(' %s' % k for k in attr2))
+            res.extend(
+                ' %s' % k
+                for k, v in self.attrs.iteritems()
+                if v is True
+                )
             w(">")
 
         if self.tag in ONE_LINE:
@@ -54,7 +54,7 @@ class TAG:
         for brother in self.brothers:
             w(str(brother))
 
-        return res.getvalue()
+        return "".join(res)
 
     def __le__(self, other):
         """Add a child"""
