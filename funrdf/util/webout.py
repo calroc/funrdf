@@ -1,92 +1,12 @@
-"""Classes to generate HTML in Python
-
-The HTMLTags module defines a class for all the valid HTML tags, written in
-uppercase letters. To create a piece of HTML, the general syntax is :
-    t = TAG(inner_HTML, key1=val1,key2=val2,...)
-
-so that "print t" results in :
-    <TAG key1="val1" key2="val2" ...>inner_HTML</TAG>
-
-For instance :
-    print A('bar', href="foo") ==> <A href="foo">bar</A>
-
-To generate HTML attributes without value, give them the value True :
-    print OPTION('foo',SELECTED=True,value=5) ==> 
-            <OPTION value="5" SELECTED>
-
-The inner_HTML argument can be an instance of an HTML class, so that 
-you can nest tags, like this :
-    print B(I('foo')) ==> <B><I>foo</I></B>
-
-TAG instances support addition :
-    print B('bar')+INPUT(name="bar") ==> <B>bar</B><INPUT name="bar">
-
-and repetition :
-    print TH('&nbsp')*3 ==> <TD>&nbsp;</TD><TD>&nbsp;</TD><TD>&nbsp;</TD>
-
-For complex expressions, a tag can be nested in another using the operator <= 
-Considering the HTML document as a tree, this means "add child" :
-
-    form = FORM(action="foo")
-    form <= INPUT(name="bar")
-    form <= INPUT(Type="submit",value="Ok")
-
-If you have a list (or any iterable) of instances, you can't concatenate the 
-items with sum(instance_list) because sum takes only numbers as arguments. So 
-there is a function called concatinate() which will do the same :
-
-    concatinate( TR(TD(i)+TD(i*i)) for i in range(100) )
-
-generates the rows of a table showing the squares of integers from 0 to 99
-
-A simple document can be produced by :
-    print HTML( HEAD(TITLE('Test document')) +
-        BODY(H1('This is a test document')+
-             'First line'+BR()+
-             'Second line'))
-
-This will be rendered as :
-    <HTML>
-    <HEAD>
-    <TITLE>Test document</TITLE>
-    </HEAD>
-    <BODY>
-    <H1>This is a test document</H1>
-    First line
-    <BR>
-    Second line
-    </BODY>
-    </HTML>
-
-If the document is more complex it is more readable to create the elements 
-first, then to print the whole result in one instruction. For example :
-
-head = HEAD()
-head <= TITLE('Record collection')
-head <= LINK(rel="Stylesheet",href="doc.css")
-
-title = H1('My record collection')
-table = TABLE()
-table <= TR(TH('Title')+TH('Artist'))
-for rec in records:
-    row = TR()
-    # note the attribute key Class with leading uppercase 
-    # because "class" is a Python keyword
-    row <= TD(rec.title,Class="title")+TD(rec.artist,Class="artist")
-    table <= row
-
-print HTML(head+BODY(title+table))
-"""
-
 import cStringIO
 
 class TAG:
-    """Generic class for tags"""
+
     def __init__(self, inner_HTML="", **attrs):
-        self.tag = self.__class__.__name__
+        self.tag = self.__class__.__name__.lower()
         self.inner_HTML = inner_HTML
         self.attrs = dict(
-            (k.replace('_','-'), v)
+            (k.replace('_','-').lower(), v)
             for k, v in attrs.iteritems()
             )
         self.children = []
@@ -95,8 +15,8 @@ class TAG:
     def __str__(self):
         res = cStringIO.StringIO()
         w = res.write
-        if self.tag != "TEXT":
-            w("<%s" % self.tag.lower())
+        if self.__class__.__name__ != "TEXT":
+            w("<%s" % self.tag)
 
             # attributes which will produce arg = "val"
             attr1 = [
@@ -105,7 +25,7 @@ class TAG:
                 if not isinstance(v, bool)
                 ]
             w("".join(
-                    ' %s="%s"' % (k.lower(), self.attrs[k])
+                    ' %s="%s"' % (k, self.attrs[k])
                     for k in attr1
                     )
               )
@@ -114,7 +34,7 @@ class TAG:
             # if value is False, don't generate anything
             # We test 'v is True' because we want only Booleans.
             attr2 = [k for k, v in self.attrs.iteritems() if v is True]
-            w("".join(' %s' % k.lower() for k in attr2))
+            w("".join(' %s' % k for k in attr2))
             w(">")
 
         if self.tag in ONE_LINE:
@@ -126,7 +46,7 @@ class TAG:
             w(str(child))
 
         if self.tag in CLOSING_TAGS:
-            w("</%s>" % self.tag.lower())
+            w("</%s>" % self.tag)
 
         if self.tag in LINE_BREAK_AFTER:
             w('\n')
@@ -179,29 +99,29 @@ class TAG:
 
 # list of tags, from the HTML 4.01 specification
 
-CLOSING_TAGS =  ['A', 'ABBR', 'ACRONYM', 'ADDRESS', 'APPLET',
-            'B', 'BDO', 'BIG', 'BLOCKQUOTE', 'BUTTON',
-            'CAPTION', 'CENTER', 'CITE', 'CODE',
-            'DEL', 'DFN', 'DIR', 'DIV', 'DL',
-            'EM', 'FIELDSET', 'FONT', 'FORM', 'FRAMESET',
-            'H1', 'H2', 'H3', 'H4', 'H5', 'H6',
-            'I', 'IFRAME', 'INS', 'KBD', 'LABEL', 'LEGEND',
-            'MAP', 'MENU', 'NOFRAMES', 'NOSCRIPT', 'OBJECT',
-            'OL', 'OPTGROUP', 'PRE', 'Q', 'S', 'SAMP',
-            'SCRIPT', 'SELECT', 'SMALL', 'SPAN', 'STRIKE',
-            'STRONG', 'STYLE', 'SUB', 'SUP', 'TABLE',
-            'TEXTAREA', 'TITLE', 'TT', 'U', 'UL',
-            'VAR', 'BODY', 'COLGROUP', 'DD', 'DT', 'HEAD',
-            'HTML', 'LI', 'P', 'TBODY','OPTION', 
-            'TD', 'TFOOT', 'TH', 'THEAD', 'TR']
+CLOSING_TAGS =  ['a', 'abbr', 'acronym', 'address', 'applet',
+            'b', 'bdo', 'big', 'blockquote', 'button',
+            'caption', 'center', 'cite', 'code',
+            'del', 'dfn', 'dir', 'div', 'dl',
+            'em', 'fieldset', 'font', 'form', 'frameset',
+            'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+            'i', 'iframe', 'ins', 'kbd', 'label', 'legend',
+            'map', 'menu', 'noframes', 'noscript', 'object',
+            'ol', 'optgroup', 'pre', 'q', 's', 'samp',
+            'script', 'select', 'small', 'span', 'strike',
+            'strong', 'style', 'sub', 'sup', 'table',
+            'textarea', 'title', 'tt', 'u', 'ul',
+            'var', 'body', 'colgroup', 'dd', 'dt', 'head',
+            'html', 'li', 'p', 'tbody','option', 
+            'td', 'tfoot', 'th', 'thead', 'tr']
 
-NON_CLOSING_TAGS = ['AREA', 'BASE', 'BASEFONT', 'BR', 'COL', 'FRAME',
-            'HR', 'IMG', 'INPUT', 'ISINDEX', 'LINK',
-            'META', 'PARAM']
+NON_CLOSING_TAGS = ['area', 'base', 'basefont', 'br', 'col', 'frame',
+            'hr', 'img', 'input', 'isindex', 'link',
+            'meta', 'param']
 
 # create the classes
-for tag in CLOSING_TAGS + NON_CLOSING_TAGS + ['TEXT']:
-    exec("class %s(TAG): pass" %tag)
+for tag in CLOSING_TAGS + NON_CLOSING_TAGS + ['text']:
+    exec("class %s(TAG): pass" % tag.upper())
     
 def concatinate(iterable):
     """Return the concatenation of the instances in the iterable."""
@@ -212,20 +132,20 @@ def concatinate(iterable):
         return ''
 
 # whitespace-insensitive tags, determines pretty-print rendering
-LINE_BREAK_AFTER = NON_CLOSING_TAGS + ['HTML','HEAD','BODY',
-    'FRAMESET','FRAME',
-    'TITLE','SCRIPT',
-    'TABLE','TR','TD','TH','SELECT','OPTION',
-    'FORM',
-    'H1', 'H2', 'H3', 'H4', 'H5', 'H6',
+LINE_BREAK_AFTER = NON_CLOSING_TAGS + ['html','head','body',
+    'frameset','frame',
+    'title','script',
+    'table','tr','td','th','select','option',
+    'form',
+    'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
     ]
 
 # tags whose opening tag should be alone in its line
-ONE_LINE = ['HTML','HEAD','BODY',
-    'FRAMESET'
-    'SCRIPT',
-    'TABLE','TR','TD','TH','SELECT','OPTION',
-    'FORM',
+ONE_LINE = ['html','head','body',
+    'frameset'
+    'script',
+    'table','tr','td','th','select','option',
+    'form',
     ]
 
 if __name__ == '__main__':
