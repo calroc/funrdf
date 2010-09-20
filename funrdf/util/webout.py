@@ -112,13 +112,8 @@ class TAG:
 
     def __add__(self, other):
         """Return a new instance : concatenation of self and another tag"""
-        res = TAG()
-        res.tag = self.tag
-        res.inner_HTML = self.inner_HTML
-        res.attrs = self.attrs
-        res.children = self.children
-        res.brothers = self.brothers + [other]
-        return res
+        self.brothers.append(other)
+        return self
 
     def __radd__(self, other):
         """Used to add a tag to a string"""
@@ -147,3 +142,65 @@ if __name__ == '__main__':
     form <= TABLE('{{ form }}\n')
     body <= form
     print HTML(head + body)
+
+
+
+##  Notice the peculiarity of expression evaluation when chaining '<='.
+##    the __le__() method had this pathched in: 
+##        print repr(self), '<=', repr(other)
+##
+##    a, b, c = TR("a"), TD("b"), IMG("c")
+##
+##    print 'TR a <= (TD b <= IMG c)'
+##    a <= (b <= c)
+##
+##    print b.parent is a, b in a.children
+##    print c.parent is b, c in b.children
+##    print; print
+##
+##
+##
+##    a, b, c = TR("a"), TD("b"), IMG("c")
+##
+##    print '(TR a <= TD b) <= IMG c'
+##    (a <= b) <= c
+##
+##    print b.parent is a, b in a.children
+##    print c.parent is b, c in b.children
+##    print; print
+##
+##
+##
+##    a, b, c = TR("a"), TD("b"), IMG("c")
+##
+##    print 'TR a <= TD b <= IMG c'
+##    a <= b <= c
+##
+##    print b.parent is a, b in a.children
+##    print c.parent is b, c in b.children
+##    print; print
+##
+##  Output:
+##
+##    >>> 
+##    TR a <= (TD b <= IMG c)
+##    <__main__.TD instance at 0x027FEA58> <= <__main__.IMG instance at 0x02804940>
+##    <__main__.TR instance at 0x027FEA30> <= <__main__.TD instance at 0x027FEA58>
+##    True True
+##    True True
+##
+##
+##    (TR a <= TD b) <= IMG c
+##    <__main__.TR instance at 0x02804AD0> <= <__main__.TD instance at 0x028048C8>
+##    <__main__.TR instance at 0x02804AD0> <= <__main__.IMG instance at 0x028048F0>
+##    True True
+##    False False
+##
+##
+##    TR a <= TD b <= IMG c
+##    <__main__.TR instance at 0x02804BE8> <= <__main__.TD instance at 0x02804C10>
+##    <__main__.TD instance at 0x02804C10> <= <__main__.IMG instance at 0x02804C38>
+##    True True
+##    True True
+##
+##
