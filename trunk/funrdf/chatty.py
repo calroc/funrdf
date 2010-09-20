@@ -12,7 +12,7 @@ class XMPPHandler(CommandHandler):
 
     def message_received(self, message):
         # Guard against random people 'talking' to the app.
-        if message.sender != 'forman.simon@gmail.com':
+        if not message.sender.startswith('forman.simon@gmail.com'):
             XMPP_LOG.warning('received message from %r' % message.sender)
             return
         super(CommandHandler, self).message_received(message)
