@@ -21,4 +21,5 @@ the Google App Engine.
 '''
 
 
-print HTML(head + body)
+html = str(HTML(head + body))
+
