@@ -13,9 +13,9 @@ class Fact(db.Model):
 
 
 def knowFact(subject, predicate, object_):
-    s = internURI(subject).key(),
-    p = internURI(predicate).key(),
-    o = internURI(object_).key(),
+    s = internURI(subject).key()
+    p = internURI(predicate).key()
+    o = internURI(object_).key()
     key_name = hashlib.md5('%s%s%s' % (s, p, o)).hexdigest()
     Fact.get_or_insert(key_name, subject=s, predicate=p, object_=o)
 
