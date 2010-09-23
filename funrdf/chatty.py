@@ -1,7 +1,8 @@
-import logging
+import logging, traceback
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.xmpp_handlers import CommandHandler
 from google.appengine.ext.webapp.util import run_wsgi_app
+from models import knowFact
 
 
 XMPP_LOG = logging.getLogger("XMPP")
@@ -20,6 +21,25 @@ class XMPPHandler(CommandHandler):
     def hello_command(self, message):
         reply = 'Bwah! %r' % message.body.lower()
         XMPP_LOG.debug(reply)
+        message.reply(reply)
+
+    def know_command(self, message):
+        parts = message.body.split()
+
+        if len(parts) != 4:
+            reply = 'Bwah! %r' % message.body
+            XMPP_LOG.debug(reply)
+
+        else:
+            _, subject, predicate, object_ = parts
+            reply = 'know: %s => %s => %s' % (subject, predicate, object_)
+            XMPP_LOG.debug('attempting to ' + reply)
+            try:
+                knowFact(subject, predicate, object_)
+            except:
+                XMPP_LOG.exception(reply)
+                reply += '\n' + traceback.format_exc()
+
         message.reply(reply)
 
     def unhandled_command(self, message):
