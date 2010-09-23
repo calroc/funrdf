@@ -13,11 +13,11 @@ class Fact(db.Model):
 
 
 def knowFact(subject, predicate, object_):
-    fact = Fact()
-    fact.subject = internURI(subject).key()
-    fact.predicate = internURI(predicate).key()
-    fact.object_ = internURI(object_).key()
-    fact.put()
+    s = internURI(subject).key(),
+    p = internURI(predicate).key(),
+    o = internURI(object_).key(),
+    key_name = hashlib.md5(s + p + o).hexdigest()
+    Fact.get_or_insert(key_name, subject=s, predicate=p, object_=o)
 
 
 def internURI(uri):
