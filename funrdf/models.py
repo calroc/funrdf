@@ -16,7 +16,7 @@ def knowFact(subject, predicate, object_):
     s = internURI(subject).key(),
     p = internURI(predicate).key(),
     o = internURI(object_).key(),
-    key_name = hashlib.md5(s + p + o).hexdigest()
+    key_name = hashlib.md5('%s%s%s' % (s, p, o)).hexdigest()
     Fact.get_or_insert(key_name, subject=s, predicate=p, object_=o)
 
 
