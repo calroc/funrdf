@@ -3,7 +3,7 @@ from google.appengine.ext import db
 
 
 class URIref(db.Model):
-    value = db.LinkProperty(required=True)
+    value = db.StringProperty(required=True)
 
 
 class Fact(db.Model):
