@@ -2,165 +2,44 @@ digraph EmailSignupModelFSM {
 
   // Nodes
   0 [ style=filled, shape=ellipse, peripheries=2, fillcolor=lightgray,
-      tooltip="{'EmailSignupModel': {'userToInt': {}, 'mode': 'Initializing', 'usersLoggedIn': []}}" ]
+      tooltip="{'EmailSignupModel': {'activeEmails': [], 'mode': 'Inactive', 'pendingEmails': []}}" ]
   1 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'userToInt': {}, 'mode': 'Running', 'usersLoggedIn': []}}" ]
-  2 [ style=filled, shape=ellipse, peripheries=1, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'userToInt': {}, 'mode': 'Running', 'usersLoggedIn': ['OleBrumm']}}" ]
-  3 [ style=filled, shape=ellipse, peripheries=1, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'userToInt': {}, 'mode': 'Running', 'usersLoggedIn': ['VinniPuhh']}}" ]
-  4 [ style=filled, shape=ellipse, peripheries=1, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'userToInt': {}, 'mode': 'Running', 'usersLoggedIn': ['OleBrumm', 'VinniPuhh']}}" ]
-  5 [ style=filled, shape=ellipse, peripheries=1, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'userToInt': {'OleBrumm': 2}, 'mode': 'Running', 'usersLoggedIn': ['OleBrumm']}}" ]
-  6 [ style=filled, shape=ellipse, peripheries=1, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'userToInt': {'OleBrumm': 1}, 'mode': 'Running', 'usersLoggedIn': ['OleBrumm']}}" ]
-  7 [ style=filled, shape=ellipse, peripheries=1, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'userToInt': {}, 'mode': 'Running', 'usersLoggedIn': ['VinniPuhh', 'OleBrumm']}}" ]
-  8 [ style=filled, shape=ellipse, peripheries=1, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'userToInt': {'VinniPuhh': 1}, 'mode': 'Running', 'usersLoggedIn': ['VinniPuhh']}}" ]
-  9 [ style=filled, shape=ellipse, peripheries=1, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'userToInt': {'VinniPuhh': 2}, 'mode': 'Running', 'usersLoggedIn': ['VinniPuhh']}}" ]
-  10 [ style=filled, shape=ellipse, peripheries=1, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'userToInt': {'VinniPuhh': 1}, 'mode': 'Running', 'usersLoggedIn': ['OleBrumm', 'VinniPuhh']}}" ]
-  11 [ style=filled, shape=ellipse, peripheries=1, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'userToInt': {'OleBrumm': 2}, 'mode': 'Running', 'usersLoggedIn': ['OleBrumm', 'VinniPuhh']}}" ]
-  12 [ style=filled, shape=ellipse, peripheries=1, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'userToInt': {'OleBrumm': 1}, 'mode': 'Running', 'usersLoggedIn': ['OleBrumm', 'VinniPuhh']}}" ]
-  13 [ style=filled, shape=ellipse, peripheries=1, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'userToInt': {'VinniPuhh': 2}, 'mode': 'Running', 'usersLoggedIn': ['OleBrumm', 'VinniPuhh']}}" ]
-  14 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'userToInt': {'OleBrumm': 2}, 'mode': 'Running', 'usersLoggedIn': []}}" ]
-  15 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'userToInt': {'OleBrumm': 1}, 'mode': 'Running', 'usersLoggedIn': []}}" ]
-  16 [ style=filled, shape=ellipse, peripheries=1, fillcolor=orange,
-      tooltip="{'EmailSignupModel': {'userToInt': {'VinniPuhh': 1}, 'mode': 'Running', 'usersLoggedIn': ['VinniPuhh', 'OleBrumm']}}" ]
-  17 [ style=filled, shape=ellipse, peripheries=1, fillcolor=orange,
-      tooltip="{'EmailSignupModel': {'userToInt': {'OleBrumm': 2}, 'mode': 'Running', 'usersLoggedIn': ['VinniPuhh', 'OleBrumm']}}" ]
-  18 [ style=filled, shape=ellipse, peripheries=1, fillcolor=orange,
-      tooltip="{'EmailSignupModel': {'userToInt': {'OleBrumm': 1}, 'mode': 'Running', 'usersLoggedIn': ['VinniPuhh', 'OleBrumm']}}" ]
-  19 [ style=filled, shape=ellipse, peripheries=1, fillcolor=orange,
-      tooltip="{'EmailSignupModel': {'userToInt': {'VinniPuhh': 2}, 'mode': 'Running', 'usersLoggedIn': ['VinniPuhh', 'OleBrumm']}}" ]
-  20 [ style=filled, shape=ellipse, peripheries=2, fillcolor=orange,
-      tooltip="{'EmailSignupModel': {'userToInt': {'VinniPuhh': 1}, 'mode': 'Running', 'usersLoggedIn': []}}" ]
-  21 [ style=filled, shape=ellipse, peripheries=2, fillcolor=orange,
-      tooltip="{'EmailSignupModel': {'userToInt': {'VinniPuhh': 2}, 'mode': 'Running', 'usersLoggedIn': []}}" ]
-  22 [ style=filled, shape=ellipse, peripheries=1, fillcolor=orange,
-      tooltip="{'EmailSignupModel': {'userToInt': {'OleBrumm': 2, 'VinniPuhh': 1}, 'mode': 'Running', 'usersLoggedIn': ['OleBrumm', 'VinniPuhh']}}" ]
-  23 [ style=filled, shape=ellipse, peripheries=1, fillcolor=orange,
-      tooltip="{'EmailSignupModel': {'userToInt': {'VinniPuhh': 1}, 'mode': 'Running', 'usersLoggedIn': ['OleBrumm']}}" ]
-  24 [ style=filled, shape=ellipse, peripheries=1, fillcolor=orange,
-      tooltip="{'EmailSignupModel': {'userToInt': {'OleBrumm': 1, 'VinniPuhh': 1}, 'mode': 'Running', 'usersLoggedIn': ['OleBrumm', 'VinniPuhh']}}" ]
-  25 [ style=filled, shape=ellipse, peripheries=1, fillcolor=orange,
-      tooltip="{'EmailSignupModel': {'userToInt': {'OleBrumm': 2}, 'mode': 'Running', 'usersLoggedIn': ['VinniPuhh']}}" ]
-  26 [ style=filled, shape=ellipse, peripheries=1, fillcolor=orange,
-      tooltip="{'EmailSignupModel': {'userToInt': {'OleBrumm': 2, 'VinniPuhh': 2}, 'mode': 'Running', 'usersLoggedIn': ['OleBrumm', 'VinniPuhh']}}" ]
-  27 [ style=filled, shape=ellipse, peripheries=1, fillcolor=orange,
-      tooltip="{'EmailSignupModel': {'userToInt': {'OleBrumm': 1}, 'mode': 'Running', 'usersLoggedIn': ['VinniPuhh']}}" ]
-  28 [ style=filled, shape=ellipse, peripheries=1, fillcolor=orange,
-      tooltip="{'EmailSignupModel': {'userToInt': {'OleBrumm': 1, 'VinniPuhh': 2}, 'mode': 'Running', 'usersLoggedIn': ['OleBrumm', 'VinniPuhh']}}" ]
-  29 [ style=filled, shape=ellipse, peripheries=1, fillcolor=orange,
-      tooltip="{'EmailSignupModel': {'userToInt': {'VinniPuhh': 2}, 'mode': 'Running', 'usersLoggedIn': ['OleBrumm']}}" ]
+      tooltip="{'EmailSignupModel': {'activeEmails': [], 'mode': 'Running', 'pendingEmails': []}}" ]
+  2 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
+      tooltip="{'EmailSignupModel': {'activeEmails': [], 'mode': 'Running', 'pendingEmails': ['OleBrumm']}}" ]
+  3 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
+      tooltip="{'EmailSignupModel': {'activeEmails': [], 'mode': 'Running', 'pendingEmails': ['VinniPuhh']}}" ]
+  4 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
+      tooltip="{'EmailSignupModel': {'activeEmails': ['OleBrumm'], 'mode': 'Running', 'pendingEmails': []}}" ]
+  5 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
+      tooltip="{'EmailSignupModel': {'activeEmails': [], 'mode': 'Running', 'pendingEmails': ['OleBrumm', 'VinniPuhh']}}" ]
+  6 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
+      tooltip="{'EmailSignupModel': {'activeEmails': ['VinniPuhh'], 'mode': 'Running', 'pendingEmails': []}}" ]
+  7 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
+      tooltip="{'EmailSignupModel': {'activeEmails': [], 'mode': 'Running', 'pendingEmails': ['VinniPuhh', 'OleBrumm']}}" ]
+  8 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
+      tooltip="{'EmailSignupModel': {'activeEmails': ['OleBrumm'], 'mode': 'Running', 'pendingEmails': ['VinniPuhh']}}" ]
+  9 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
+      tooltip="{'EmailSignupModel': {'activeEmails': ['VinniPuhh'], 'mode': 'Running', 'pendingEmails': ['OleBrumm']}}" ]
+  10 [ style=filled, shape=ellipse, peripheries=2, fillcolor=lightgreen,
+      tooltip="{'EmailSignupModel': {'activeEmails': ['OleBrumm', 'VinniPuhh'], 'mode': 'Running', 'pendingEmails': []}}" ]
+  11 [ style=filled, shape=ellipse, peripheries=2, fillcolor=lightgreen,
+      tooltip="{'EmailSignupModel': {'activeEmails': ['VinniPuhh', 'OleBrumm'], 'mode': 'Running', 'pendingEmails': []}}" ]
 
   // Transitions
   0 -> 1 [ label="Initialize()", tooltip="Initialize()" ]
-  1 -> 1 [ label="Login('OleBrumm', 'Incorrect')/'Failure'", tooltip="Login('OleBrumm', 'Incorrect')/'Failure'" ]
-  1 -> 1 [ label="Login('VinniPuhh', 'Incorrect')/'Failure'", tooltip="Login('VinniPuhh', 'Incorrect')/'Failure'" ]
-  1 -> 2 [ label="Login('OleBrumm', 'Correct')/'Success'", tooltip="Login('OleBrumm', 'Correct')/'Success'" ]
-  1 -> 3 [ label="Login('VinniPuhh', 'Correct')/'Success'", tooltip="Login('VinniPuhh', 'Correct')/'Success'" ]
-  2 -> 2 [ label="Login('VinniPuhh', 'Incorrect')/'Failure'", tooltip="Login('VinniPuhh', 'Incorrect')/'Failure'" ]
-  2 -> 4 [ label="Login('VinniPuhh', 'Correct')/'Success'", tooltip="Login('VinniPuhh', 'Correct')/'Success'" ]
-  2 -> 1 [ label="Logout('OleBrumm',)", tooltip="Logout('OleBrumm',)" ]
-  2 -> 5 [ label="UpdateInt('OleBrumm', 2)", tooltip="UpdateInt('OleBrumm', 2)" ]
-  2 -> 6 [ label="UpdateInt('OleBrumm', 1)", tooltip="UpdateInt('OleBrumm', 1)" ]
-  2 -> 2 [ label="ReadInt('OleBrumm',)/0", tooltip="ReadInt('OleBrumm',)/0" ]
-  3 -> 7 [ label="Login('OleBrumm', 'Correct')/'Success'", tooltip="Login('OleBrumm', 'Correct')/'Success'" ]
-  3 -> 3 [ label="ReadInt('VinniPuhh',)/0", tooltip="ReadInt('VinniPuhh',)/0" ]
-  3 -> 8 [ label="UpdateInt('VinniPuhh', 1)", tooltip="UpdateInt('VinniPuhh', 1)" ]
-  3 -> 3 [ label="Login('OleBrumm', 'Incorrect')/'Failure'", tooltip="Login('OleBrumm', 'Incorrect')/'Failure'" ]
-  3 -> 1 [ label="Logout('VinniPuhh',)", tooltip="Logout('VinniPuhh',)" ]
-  3 -> 9 [ label="UpdateInt('VinniPuhh', 2)", tooltip="UpdateInt('VinniPuhh', 2)" ]
-  4 -> 4 [ label="ReadInt('VinniPuhh',)/0", tooltip="ReadInt('VinniPuhh',)/0" ]
-  4 -> 10 [ label="UpdateInt('VinniPuhh', 1)", tooltip="UpdateInt('VinniPuhh', 1)" ]
-  4 -> 3 [ label="Logout('OleBrumm',)", tooltip="Logout('OleBrumm',)" ]
-  4 -> 11 [ label="UpdateInt('OleBrumm', 2)", tooltip="UpdateInt('OleBrumm', 2)" ]
-  4 -> 2 [ label="Logout('VinniPuhh',)", tooltip="Logout('VinniPuhh',)" ]
-  4 -> 12 [ label="UpdateInt('OleBrumm', 1)", tooltip="UpdateInt('OleBrumm', 1)" ]
-  4 -> 4 [ label="ReadInt('OleBrumm',)/0", tooltip="ReadInt('OleBrumm',)/0" ]
-  4 -> 13 [ label="UpdateInt('VinniPuhh', 2)", tooltip="UpdateInt('VinniPuhh', 2)" ]
-  5 -> 14 [ label="Logout('OleBrumm',)", tooltip="Logout('OleBrumm',)" ]
-  5 -> 5 [ label="ReadInt('OleBrumm',)/2", tooltip="ReadInt('OleBrumm',)/2" ]
-  5 -> 5 [ label="Login('VinniPuhh', 'Incorrect')/'Failure'", tooltip="Login('VinniPuhh', 'Incorrect')/'Failure'" ]
-  5 -> 5 [ label="UpdateInt('OleBrumm', 2)", tooltip="UpdateInt('OleBrumm', 2)" ]
-  5 -> 11 [ label="Login('VinniPuhh', 'Correct')/'Success'", tooltip="Login('VinniPuhh', 'Correct')/'Success'" ]
-  5 -> 6 [ label="UpdateInt('OleBrumm', 1)", tooltip="UpdateInt('OleBrumm', 1)" ]
-  6 -> 5 [ label="UpdateInt('OleBrumm', 2)", tooltip="UpdateInt('OleBrumm', 2)" ]
-  6 -> 6 [ label="Login('VinniPuhh', 'Incorrect')/'Failure'", tooltip="Login('VinniPuhh', 'Incorrect')/'Failure'" ]
-  6 -> 12 [ label="Login('VinniPuhh', 'Correct')/'Success'", tooltip="Login('VinniPuhh', 'Correct')/'Success'" ]
-  6 -> 15 [ label="Logout('OleBrumm',)", tooltip="Logout('OleBrumm',)" ]
-  6 -> 6 [ label="ReadInt('OleBrumm',)/1", tooltip="ReadInt('OleBrumm',)/1" ]
-  6 -> 6 [ label="UpdateInt('OleBrumm', 1)", tooltip="UpdateInt('OleBrumm', 1)" ]
-  7 -> 7 [ label="ReadInt('VinniPuhh',)/0", tooltip="ReadInt('VinniPuhh',)/0" ]
-  7 -> 16 [ label="UpdateInt('VinniPuhh', 1)", tooltip="UpdateInt('VinniPuhh', 1)" ]
-  7 -> 3 [ label="Logout('OleBrumm',)", tooltip="Logout('OleBrumm',)" ]
-  7 -> 17 [ label="UpdateInt('OleBrumm', 2)", tooltip="UpdateInt('OleBrumm', 2)" ]
-  7 -> 2 [ label="Logout('VinniPuhh',)", tooltip="Logout('VinniPuhh',)" ]
-  7 -> 18 [ label="UpdateInt('OleBrumm', 1)", tooltip="UpdateInt('OleBrumm', 1)" ]
-  7 -> 7 [ label="ReadInt('OleBrumm',)/0", tooltip="ReadInt('OleBrumm',)/0" ]
-  7 -> 19 [ label="UpdateInt('VinniPuhh', 2)", tooltip="UpdateInt('VinniPuhh', 2)" ]
-  8 -> 16 [ label="Login('OleBrumm', 'Correct')/'Success'", tooltip="Login('OleBrumm', 'Correct')/'Success'" ]
-  8 -> 8 [ label="UpdateInt('VinniPuhh', 1)", tooltip="UpdateInt('VinniPuhh', 1)" ]
-  8 -> 8 [ label="ReadInt('VinniPuhh',)/1", tooltip="ReadInt('VinniPuhh',)/1" ]
-  8 -> 8 [ label="Login('OleBrumm', 'Incorrect')/'Failure'", tooltip="Login('OleBrumm', 'Incorrect')/'Failure'" ]
-  8 -> 20 [ label="Logout('VinniPuhh',)", tooltip="Logout('VinniPuhh',)" ]
-  8 -> 9 [ label="UpdateInt('VinniPuhh', 2)", tooltip="UpdateInt('VinniPuhh', 2)" ]
-  9 -> 19 [ label="Login('OleBrumm', 'Correct')/'Success'", tooltip="Login('OleBrumm', 'Correct')/'Success'" ]
-  9 -> 8 [ label="UpdateInt('VinniPuhh', 1)", tooltip="UpdateInt('VinniPuhh', 1)" ]
-  9 -> 9 [ label="Login('OleBrumm', 'Incorrect')/'Failure'", tooltip="Login('OleBrumm', 'Incorrect')/'Failure'" ]
-  9 -> 9 [ label="ReadInt('VinniPuhh',)/2", tooltip="ReadInt('VinniPuhh',)/2" ]
-  9 -> 21 [ label="Logout('VinniPuhh',)", tooltip="Logout('VinniPuhh',)" ]
-  9 -> 9 [ label="UpdateInt('VinniPuhh', 2)", tooltip="UpdateInt('VinniPuhh', 2)" ]
-  10 -> 10 [ label="UpdateInt('VinniPuhh', 1)", tooltip="UpdateInt('VinniPuhh', 1)" ]
-  10 -> 10 [ label="ReadInt('VinniPuhh',)/1", tooltip="ReadInt('VinniPuhh',)/1" ]
-  10 -> 8 [ label="Logout('OleBrumm',)", tooltip="Logout('OleBrumm',)" ]
-  10 -> 22 [ label="UpdateInt('OleBrumm', 2)", tooltip="UpdateInt('OleBrumm', 2)" ]
-  10 -> 23 [ label="Logout('VinniPuhh',)", tooltip="Logout('VinniPuhh',)" ]
-  10 -> 24 [ label="UpdateInt('OleBrumm', 1)", tooltip="UpdateInt('OleBrumm', 1)" ]
-  10 -> 10 [ label="ReadInt('OleBrumm',)/0", tooltip="ReadInt('OleBrumm',)/0" ]
-  10 -> 13 [ label="UpdateInt('VinniPuhh', 2)", tooltip="UpdateInt('VinniPuhh', 2)" ]
-  11 -> 11 [ label="ReadInt('VinniPuhh',)/0", tooltip="ReadInt('VinniPuhh',)/0" ]
-  11 -> 22 [ label="UpdateInt('VinniPuhh', 1)", tooltip="UpdateInt('VinniPuhh', 1)" ]
-  11 -> 11 [ label="ReadInt('OleBrumm',)/2", tooltip="ReadInt('OleBrumm',)/2" ]
-  11 -> 25 [ label="Logout('OleBrumm',)", tooltip="Logout('OleBrumm',)" ]
-  11 -> 11 [ label="UpdateInt('OleBrumm', 2)", tooltip="UpdateInt('OleBrumm', 2)" ]
-  11 -> 5 [ label="Logout('VinniPuhh',)", tooltip="Logout('VinniPuhh',)" ]
-  11 -> 12 [ label="UpdateInt('OleBrumm', 1)", tooltip="UpdateInt('OleBrumm', 1)" ]
-  11 -> 26 [ label="UpdateInt('VinniPuhh', 2)", tooltip="UpdateInt('VinniPuhh', 2)" ]
-  12 -> 12 [ label="ReadInt('VinniPuhh',)/0", tooltip="ReadInt('VinniPuhh',)/0" ]
-  12 -> 11 [ label="UpdateInt('OleBrumm', 2)", tooltip="UpdateInt('OleBrumm', 2)" ]
-  12 -> 24 [ label="UpdateInt('VinniPuhh', 1)", tooltip="UpdateInt('VinniPuhh', 1)" ]
-  12 -> 27 [ label="Logout('OleBrumm',)", tooltip="Logout('OleBrumm',)" ]
-  12 -> 12 [ label="ReadInt('OleBrumm',)/1", tooltip="ReadInt('OleBrumm',)/1" ]
-  12 -> 6 [ label="Logout('VinniPuhh',)", tooltip="Logout('VinniPuhh',)" ]
-  12 -> 12 [ label="UpdateInt('OleBrumm', 1)", tooltip="UpdateInt('OleBrumm', 1)" ]
-  12 -> 28 [ label="UpdateInt('VinniPuhh', 2)", tooltip="UpdateInt('VinniPuhh', 2)" ]
-  13 -> 26 [ label="UpdateInt('OleBrumm', 2)", tooltip="UpdateInt('OleBrumm', 2)" ]
-  13 -> 10 [ label="UpdateInt('VinniPuhh', 1)", tooltip="UpdateInt('VinniPuhh', 1)" ]
-  13 -> 9 [ label="Logout('OleBrumm',)", tooltip="Logout('OleBrumm',)" ]
-  13 -> 13 [ label="ReadInt('VinniPuhh',)/2", tooltip="ReadInt('VinniPuhh',)/2" ]
-  13 -> 29 [ label="Logout('VinniPuhh',)", tooltip="Logout('VinniPuhh',)" ]
-  13 -> 28 [ label="UpdateInt('OleBrumm', 1)", tooltip="UpdateInt('OleBrumm', 1)" ]
-  13 -> 13 [ label="ReadInt('OleBrumm',)/0", tooltip="ReadInt('OleBrumm',)/0" ]
-  13 -> 13 [ label="UpdateInt('VinniPuhh', 2)", tooltip="UpdateInt('VinniPuhh', 2)" ]
-  14 -> 14 [ label="Login('OleBrumm', 'Incorrect')/'Failure'", tooltip="Login('OleBrumm', 'Incorrect')/'Failure'" ]
-  14 -> 14 [ label="Login('VinniPuhh', 'Incorrect')/'Failure'", tooltip="Login('VinniPuhh', 'Incorrect')/'Failure'" ]
-  14 -> 5 [ label="Login('OleBrumm', 'Correct')/'Success'", tooltip="Login('OleBrumm', 'Correct')/'Success'" ]
-  14 -> 25 [ label="Login('VinniPuhh', 'Correct')/'Success'", tooltip="Login('VinniPuhh', 'Correct')/'Success'" ]
-  15 -> 15 [ label="Login('OleBrumm', 'Incorrect')/'Failure'", tooltip="Login('OleBrumm', 'Incorrect')/'Failure'" ]
-  15 -> 15 [ label="Login('VinniPuhh', 'Incorrect')/'Failure'", tooltip="Login('VinniPuhh', 'Incorrect')/'Failure'" ]
-  15 -> 6 [ label="Login('OleBrumm', 'Correct')/'Success'", tooltip="Login('OleBrumm', 'Correct')/'Success'" ]
-  15 -> 27 [ label="Login('VinniPuhh', 'Correct')/'Success'", tooltip="Login('VinniPuhh', 'Correct')/'Success'" ]
-  16 -> 16 [ label="UpdateInt('VinniPuhh', 1)", tooltip="UpdateInt('VinniPuhh', 1)" ]
-  16 -> 16 [ label="ReadInt('VinniPuhh',)/1", tooltip="ReadInt('VinniPuhh',)/1" ]
-  16 -> 8 [ label="Logout('OleBrumm',)", tooltip="Logout('OleBrumm',)" ]
+  1 -> 2 [ label="Recv('OleBrumm',)/'pending'", tooltip="Recv('OleBrumm',)/'pending'" ]
+  1 -> 3 [ label="Recv('VinniPuhh',)/'pending'", tooltip="Recv('VinniPuhh',)/'pending'" ]
+  2 -> 4 [ label="Recv('OleBrumm',)/'activate'", tooltip="Recv('OleBrumm',)/'activate'" ]
+  2 -> 5 [ label="Recv('VinniPuhh',)/'pending'", tooltip="Recv('VinniPuhh',)/'pending'" ]
+  3 -> 6 [ label="Recv('VinniPuhh',)/'activate'", tooltip="Recv('VinniPuhh',)/'activate'" ]
+  3 -> 7 [ label="Recv('OleBrumm',)/'pending'", tooltip="Recv('OleBrumm',)/'pending'" ]
+  4 -> 8 [ label="Recv('VinniPuhh',)/'pending'", tooltip="Recv('VinniPuhh',)/'pending'" ]
+  5 -> 8 [ label="Recv('OleBrumm',)/'activate'", tooltip="Recv('OleBrumm',)/'activate'" ]
+  5 -> 9 [ label="Recv('VinniPuhh',)/'activate'", tooltip="Recv('VinniPuhh',)/'activate'" ]
+  6 -> 9 [ label="Recv('OleBrumm',)/'pending'", tooltip="Recv('OleBrumm',)/'pending'" ]
+  7 -> 8 [ label="Recv('OleBrumm',)/'activate'", tooltip="Recv('OleBrumm',)/'activate'" ]
+  7 -> 9 [ label="Recv('VinniPuhh',)/'activate'", tooltip="Recv('VinniPuhh',)/'activate'" ]
+  8 -> 10 [ label="Recv('VinniPuhh',)/'activate'", tooltip="Recv('VinniPuhh',)/'activate'" ]
+  9 -> 11 [ label="Recv('OleBrumm',)/'activate'", tooltip="Recv('OleBrumm',)/'activate'" ]
 }
