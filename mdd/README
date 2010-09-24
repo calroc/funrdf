@@ -1,0 +1,36 @@
+Some notes on using PyModel.
+============================
+
+After adding the pymodel-0.85/src directory to my PYTHONPATH environment
+variable so the PyModel code can find its imports, and symlinking the
+pma.py, pmg.py, and pmt.py scripts into my local bin dir (I drop the
+'.py' suffixes from the symlinks) I can call the PyModel tools like so:
+
+    funrdf/mdd$ pma EmailSignupModel
+    30 states, 100 transitions, 6 accepting states
+
+Which generates an EmailSignupModelFSM.py script.
+
+But first you have to put the models dir on the PYTHONPATH as well (this
+is covered in the docs for PyModel, and there's a script called tpath in
+the pymodel-0.85/src directory which will do this for the current
+directory.)
+
+    funrdf/mdd$ export PYTHONPATH=$PYTHONPATH:.
+
+Then you can run the pmg script to generate a dot file:
+
+    funrdf/mdd$ pmg EmailSignupModelFSM
+
+Creates 'EmailSignupModelFSM.dot' which can be fed to the Graphviz tools
+to generate various visua;izations. (Again, there are scripts that come
+with the PyModel package that simplify this.)
+
+    funrdf/mdd$ dot -v -Tsvg -o EmailSignupModelFSM.svg EmailSignupModelFSM.dot
+
+Creates 'EmailSignupModelFSM.svg' which you can view in a browser, etc...
+
+There is a lot more information on this tool chain in the PyModel docs.
+
+http://staff.washington.edu/jon/pymodel/www/
+
