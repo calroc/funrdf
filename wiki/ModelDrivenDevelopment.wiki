@@ -1,3 +1,8 @@
 #summary MDD and the Email Signup Process
 
 = Model Driven Development =
+
+I saw [http://www.seapig.org/NWPD10 Jon Jacky's talk at Northwest Python Day 2010] and I've wanted to use [http://staff.washington.edu/jon/pymodel/www/ PyModel] for web app design and development ever since.
+
+In the [http://code.google.com/p/funrdf/source/browse/#svn/trunk/mdd mdd directory] I've adapted some of the sample model code from the PyModel package to begin to describe a simple email signup process.
+
