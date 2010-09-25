@@ -17,8 +17,8 @@ CLOSING_TAGS =  set(['a', 'abbr', 'acronym', 'address', 'applet',
     'td', 'tfoot', 'th', 'thead', 'tr'])
 
 
-NON_CLOSING_TAGS = set(['area', 'base', 'basefont', 'br', 'col', 'frame',
-    'hr', 'img', 'input', 'isindex', 'link',
+NON_CLOSING_TAGS = set(['area', 'base', 'basefont', 'br', 'col', 'embed',
+    'frame', 'hr', 'img', 'input', 'isindex', 'link',
     'meta', 'param'])
 
 
