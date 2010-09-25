@@ -1,5 +1,5 @@
 
-# pma EmailSignupModel
+# pma EmailSignupModel SingleEmail
 # 12 states, 15 transitions, 12 accepting states, 2 finished and 0 deadend states
 
 # actions here are just labels, but must be symbols with __name__ attribute

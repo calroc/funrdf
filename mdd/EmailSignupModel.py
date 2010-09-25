@@ -55,7 +55,7 @@ enablers = {
 
 # default domains
 
-users = ['VinniPuhh', 'OleBrumm']
+users = ['VinniPuhh']
 
 domains = {
   Recv: {'address':users},
