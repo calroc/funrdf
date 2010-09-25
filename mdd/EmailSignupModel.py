@@ -10,8 +10,8 @@ RUNNING = 'Running'
 # State, with initial values
 
 mode = INACTIVE  # can't call it 'state', that has special meaning
-pendingEmails = []
-activeEmails = []
+pendingEmails = set()
+activeEmails = set()
 
 
 # Actions and enabling conditions
@@ -30,10 +30,10 @@ def Recv(address):
 
   if address in pendingEmails:
     pendingEmails.remove(address)
-    activeEmails.append(address)
+    activeEmails.add(address)
     return 'activate'
 
-  pendingEmails.append(address)
+  pendingEmails.add(address)
   return 'pending'
 
 def RecvEnabled(address):
@@ -66,5 +66,5 @@ domains = {
 def Reset():
   global mode, pendingEmails, activeEmails
   mode = INACTIVE
-  del pendingEmails[:]
-  del activeEmails[:]
+  pendingEmails.clear()
+  activeEmails.clear()
