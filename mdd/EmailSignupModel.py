@@ -44,7 +44,7 @@ def Recv(address, body):
 def RecvEnabled(address, body):
   return (
     mode == RUNNING
-    and (
+    and ((
       body == SIGNUP and
       address not in activeEmails and
       address not in pendingEmails
@@ -53,7 +53,7 @@ def RecvEnabled(address, body):
       body == CONFIRM and
       address not in activeEmails and
       address in pendingEmails
-      )
+      ))
     )
 
 def Err(address, body):
@@ -80,8 +80,11 @@ def ErrEnabled(address, body):
 
 
 def Report():
-  global mode
-  mode = INACTIVE
+  global pendingEmails, activeEmails, mode
+  if pendingEmails or activeEmails:
+    mode = RUNNING
+  else:
+    mode = INACTIVE
 
 def ReportEnabled():
   return mode == ERR

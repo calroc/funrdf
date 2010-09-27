@@ -6,19 +6,73 @@ digraph EmailSignupModelFSM {
   1 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
       tooltip="{'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Running', 'pendingEmails': set([])}}" ]
   2 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
+      tooltip="{'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Running', 'pendingEmails': set(['OleBrumm'])}}" ]
+  3 [ style=filled, shape=ellipse, peripheries=2, fillcolor=red,
       tooltip="{'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Error', 'pendingEmails': set([])}}" ]
-  3 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Running', 'pendingEmails': set(['VinniPuhh'])}}" ]
   4 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
+      tooltip="{'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Running', 'pendingEmails': set(['VinniPuhh'])}}" ]
+  5 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
+      tooltip="{'EmailSignupModel': {'activeEmails': set(['OleBrumm']), 'mode': 'Running', 'pendingEmails': set([])}}" ]
+  6 [ style=filled, shape=ellipse, peripheries=2, fillcolor=red,
+      tooltip="{'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Error', 'pendingEmails': set(['OleBrumm'])}}" ]
+  7 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
+      tooltip="{'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Running', 'pendingEmails': set(['OleBrumm', 'VinniPuhh'])}}" ]
+  8 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
       tooltip="{'EmailSignupModel': {'activeEmails': set(['VinniPuhh']), 'mode': 'Running', 'pendingEmails': set([])}}" ]
+  9 [ style=filled, shape=ellipse, peripheries=2, fillcolor=red,
+      tooltip="{'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Error', 'pendingEmails': set(['VinniPuhh'])}}" ]
+  10 [ style=filled, shape=ellipse, peripheries=2, fillcolor=red,
+      tooltip="{'EmailSignupModel': {'activeEmails': set(['OleBrumm']), 'mode': 'Error', 'pendingEmails': set([])}}" ]
+  11 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
+      tooltip="{'EmailSignupModel': {'activeEmails': set(['OleBrumm']), 'mode': 'Running', 'pendingEmails': set(['VinniPuhh'])}}" ]
+  12 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
+      tooltip="{'EmailSignupModel': {'activeEmails': set(['VinniPuhh']), 'mode': 'Running', 'pendingEmails': set(['OleBrumm'])}}" ]
+  13 [ style=filled, shape=ellipse, peripheries=2, fillcolor=red,
+      tooltip="{'EmailSignupModel': {'activeEmails': set(['VinniPuhh']), 'mode': 'Error', 'pendingEmails': set([])}}" ]
+  14 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
+      tooltip="{'EmailSignupModel': {'activeEmails': set(['OleBrumm', 'VinniPuhh']), 'mode': 'Running', 'pendingEmails': set([])}}" ]
 
   // Transitions
   0 -> 1 [ label="Initialize()", tooltip="Initialize()" ]
-  1 -> 2 [ label="Err('VinniPuhh', 'confirm')", tooltip="Err('VinniPuhh', 'confirm')" ]
-  1 -> 3 [ label="Recv('VinniPuhh', 'sign up')/'pending'", tooltip="Recv('VinniPuhh', 'sign up')/'pending'" ]
-  2 -> 0 [ label="Report()", tooltip="Report()" ]
-  3 -> 2 [ label="Err('VinniPuhh', 'sign up')", tooltip="Err('VinniPuhh', 'sign up')" ]
-  3 -> 4 [ label="Recv('VinniPuhh', 'confirm')/'activate'", tooltip="Recv('VinniPuhh', 'confirm')/'activate'" ]
-  4 -> 2 [ label="Err('VinniPuhh', 'sign up')", tooltip="Err('VinniPuhh', 'sign up')" ]
-  4 -> 2 [ label="Err('VinniPuhh', 'confirm')", tooltip="Err('VinniPuhh', 'confirm')" ]
+  1 -> 2 [ label="Recv('OleBrumm', 'sign up')/'pending'", tooltip="Recv('OleBrumm', 'sign up')/'pending'" ]
+  1 -> 3 [ label="Err('VinniPuhh', 'confirm')", tooltip="Err('VinniPuhh', 'confirm')" ]
+  1 -> 4 [ label="Recv('VinniPuhh', 'sign up')/'pending'", tooltip="Recv('VinniPuhh', 'sign up')/'pending'" ]
+  1 -> 3 [ label="Err('OleBrumm', 'confirm')", tooltip="Err('OleBrumm', 'confirm')" ]
+  2 -> 3 [ label="Err('OleBrumm', 'sign up')", tooltip="Err('OleBrumm', 'sign up')" ]
+  2 -> 5 [ label="Recv('OleBrumm', 'confirm')/'activate'", tooltip="Recv('OleBrumm', 'confirm')/'activate'" ]
+  2 -> 6 [ label="Err('VinniPuhh', 'confirm')", tooltip="Err('VinniPuhh', 'confirm')" ]
+  2 -> 7 [ label="Recv('VinniPuhh', 'sign up')/'pending'", tooltip="Recv('VinniPuhh', 'sign up')/'pending'" ]
+  3 -> 0 [ label="Report()", tooltip="Report()" ]
+  4 -> 7 [ label="Recv('OleBrumm', 'sign up')/'pending'", tooltip="Recv('OleBrumm', 'sign up')/'pending'" ]
+  4 -> 3 [ label="Err('VinniPuhh', 'sign up')", tooltip="Err('VinniPuhh', 'sign up')" ]
+  4 -> 8 [ label="Recv('VinniPuhh', 'confirm')/'activate'", tooltip="Recv('VinniPuhh', 'confirm')/'activate'" ]
+  4 -> 9 [ label="Err('OleBrumm', 'confirm')", tooltip="Err('OleBrumm', 'confirm')" ]
+  5 -> 3 [ label="Err('OleBrumm', 'sign up')", tooltip="Err('OleBrumm', 'sign up')" ]
+  5 -> 10 [ label="Err('VinniPuhh', 'confirm')", tooltip="Err('VinniPuhh', 'confirm')" ]
+  5 -> 11 [ label="Recv('VinniPuhh', 'sign up')/'pending'", tooltip="Recv('VinniPuhh', 'sign up')/'pending'" ]
+  5 -> 3 [ label="Err('OleBrumm', 'confirm')", tooltip="Err('OleBrumm', 'confirm')" ]
+  6 -> 2 [ label="Report()", tooltip="Report()" ]
+  7 -> 9 [ label="Err('OleBrumm', 'sign up')", tooltip="Err('OleBrumm', 'sign up')" ]
+  7 -> 11 [ label="Recv('OleBrumm', 'confirm')/'activate'", tooltip="Recv('OleBrumm', 'confirm')/'activate'" ]
+  7 -> 12 [ label="Recv('VinniPuhh', 'confirm')/'activate'", tooltip="Recv('VinniPuhh', 'confirm')/'activate'" ]
+  7 -> 6 [ label="Err('VinniPuhh', 'sign up')", tooltip="Err('VinniPuhh', 'sign up')" ]
+  8 -> 12 [ label="Recv('OleBrumm', 'sign up')/'pending'", tooltip="Recv('OleBrumm', 'sign up')/'pending'" ]
+  8 -> 3 [ label="Err('VinniPuhh', 'sign up')", tooltip="Err('VinniPuhh', 'sign up')" ]
+  8 -> 3 [ label="Err('VinniPuhh', 'confirm')", tooltip="Err('VinniPuhh', 'confirm')" ]
+  8 -> 13 [ label="Err('OleBrumm', 'confirm')", tooltip="Err('OleBrumm', 'confirm')" ]
+  9 -> 4 [ label="Report()", tooltip="Report()" ]
+  10 -> 5 [ label="Report()", tooltip="Report()" ]
+  11 -> 9 [ label="Err('OleBrumm', 'sign up')", tooltip="Err('OleBrumm', 'sign up')" ]
+  11 -> 10 [ label="Err('VinniPuhh', 'sign up')", tooltip="Err('VinniPuhh', 'sign up')" ]
+  11 -> 14 [ label="Recv('VinniPuhh', 'confirm')/'activate'", tooltip="Recv('VinniPuhh', 'confirm')/'activate'" ]
+  11 -> 9 [ label="Err('OleBrumm', 'confirm')", tooltip="Err('OleBrumm', 'confirm')" ]
+  12 -> 13 [ label="Err('OleBrumm', 'sign up')", tooltip="Err('OleBrumm', 'sign up')" ]
+  12 -> 14 [ label="Recv('OleBrumm', 'confirm')/'activate'", tooltip="Recv('OleBrumm', 'confirm')/'activate'" ]
+  12 -> 6 [ label="Err('VinniPuhh', 'confirm')", tooltip="Err('VinniPuhh', 'confirm')" ]
+  12 -> 6 [ label="Err('VinniPuhh', 'sign up')", tooltip="Err('VinniPuhh', 'sign up')" ]
+  13 -> 8 [ label="Report()", tooltip="Report()" ]
+  14 -> 13 [ label="Err('OleBrumm', 'sign up')", tooltip="Err('OleBrumm', 'sign up')" ]
+  14 -> 10 [ label="Err('VinniPuhh', 'sign up')", tooltip="Err('VinniPuhh', 'sign up')" ]
+  14 -> 10 [ label="Err('VinniPuhh', 'confirm')", tooltip="Err('VinniPuhh', 'confirm')" ]
+  14 -> 13 [ label="Err('OleBrumm', 'confirm')", tooltip="Err('OleBrumm', 'confirm')" ]
 }
