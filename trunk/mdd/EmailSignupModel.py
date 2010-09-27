@@ -25,7 +25,7 @@ def InitializeEnabled():
   return mode == INACTIVE
 
 
-def Recv(address):
+def Recv(address, body):
   global pendingEmails
 
   if address in pendingEmails:
@@ -36,7 +36,7 @@ def Recv(address):
   pendingEmails.add(address)
   return 'pending'
 
-def RecvEnabled(address):
+def RecvEnabled(address, body):
   return mode == RUNNING and address not in activeEmails
 
 
@@ -56,9 +56,13 @@ enablers = {
 # default domains
 
 users = ['VinniPuhh']
+messages = ['sign up', 'confirm']
 
 domains = {
-  Recv: {'address':users},
+  Recv: {
+    'address': users,
+    'body': messages,
+    },
   }
 
 # needed for multiple test runs in one session
