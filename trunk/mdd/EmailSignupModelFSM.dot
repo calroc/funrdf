@@ -6,12 +6,19 @@ digraph EmailSignupModelFSM {
   1 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
       tooltip="{'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Running', 'pendingEmails': set([])}}" ]
   2 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
+      tooltip="{'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Error', 'pendingEmails': set([])}}" ]
+  3 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
       tooltip="{'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Running', 'pendingEmails': set(['VinniPuhh'])}}" ]
-  3 [ style=filled, shape=ellipse, peripheries=2, fillcolor=lightgreen,
+  4 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
       tooltip="{'EmailSignupModel': {'activeEmails': set(['VinniPuhh']), 'mode': 'Running', 'pendingEmails': set([])}}" ]
 
   // Transitions
   0 -> 1 [ label="Initialize()", tooltip="Initialize()" ]
-  1 -> 2 [ label="Recv('VinniPuhh', 'sign up')/'pending'", tooltip="Recv('VinniPuhh', 'sign up')/'pending'" ]
-  2 -> 3 [ label="Recv('VinniPuhh', 'confirm')/'activate'", tooltip="Recv('VinniPuhh', 'confirm')/'activate'" ]
+  1 -> 2 [ label="Err('VinniPuhh', 'confirm')", tooltip="Err('VinniPuhh', 'confirm')" ]
+  1 -> 3 [ label="Recv('VinniPuhh', 'sign up')/'pending'", tooltip="Recv('VinniPuhh', 'sign up')/'pending'" ]
+  2 -> 0 [ label="Report()", tooltip="Report()" ]
+  3 -> 2 [ label="Err('VinniPuhh', 'sign up')", tooltip="Err('VinniPuhh', 'sign up')" ]
+  3 -> 4 [ label="Recv('VinniPuhh', 'confirm')/'activate'", tooltip="Recv('VinniPuhh', 'confirm')/'activate'" ]
+  4 -> 2 [ label="Err('VinniPuhh', 'sign up')", tooltip="Err('VinniPuhh', 'sign up')" ]
+  4 -> 2 [ label="Err('VinniPuhh', 'confirm')", tooltip="Err('VinniPuhh', 'confirm')" ]
 }
