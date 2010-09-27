@@ -2,44 +2,20 @@ digraph EmailSignupModelFSM {
 
   // Nodes
   0 [ style=filled, shape=ellipse, peripheries=2, fillcolor=lightgray,
-      tooltip="{'EmailSignupModel': {'activeEmails': [], 'mode': 'Inactive', 'pendingEmails': []}}" ]
+      tooltip="{'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Inactive', 'pendingEmails': set([])}, 'foo': {}}" ]
   1 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'activeEmails': [], 'mode': 'Running', 'pendingEmails': []}}" ]
+      tooltip="{'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Running', 'pendingEmails': set([])}, 'foo': {}}" ]
   2 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'activeEmails': [], 'mode': 'Running', 'pendingEmails': ['OleBrumm']}}" ]
+      tooltip="{'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Running', 'pendingEmails': set(['VinniPuhh'])}, 'foo': {}}" ]
   3 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'activeEmails': [], 'mode': 'Running', 'pendingEmails': ['VinniPuhh']}}" ]
-  4 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'activeEmails': ['OleBrumm'], 'mode': 'Running', 'pendingEmails': []}}" ]
-  5 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'activeEmails': [], 'mode': 'Running', 'pendingEmails': ['OleBrumm', 'VinniPuhh']}}" ]
-  6 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'activeEmails': ['VinniPuhh'], 'mode': 'Running', 'pendingEmails': []}}" ]
-  7 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'activeEmails': [], 'mode': 'Running', 'pendingEmails': ['VinniPuhh', 'OleBrumm']}}" ]
-  8 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'activeEmails': ['OleBrumm'], 'mode': 'Running', 'pendingEmails': ['VinniPuhh']}}" ]
-  9 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'activeEmails': ['VinniPuhh'], 'mode': 'Running', 'pendingEmails': ['OleBrumm']}}" ]
-  10 [ style=filled, shape=ellipse, peripheries=2, fillcolor=lightgreen,
-      tooltip="{'EmailSignupModel': {'activeEmails': ['OleBrumm', 'VinniPuhh'], 'mode': 'Running', 'pendingEmails': []}}" ]
-  11 [ style=filled, shape=ellipse, peripheries=2, fillcolor=lightgreen,
-      tooltip="{'EmailSignupModel': {'activeEmails': ['VinniPuhh', 'OleBrumm'], 'mode': 'Running', 'pendingEmails': []}}" ]
+      tooltip="{'EmailSignupModel': {'activeEmails': set(['VinniPuhh']), 'mode': 'Running', 'pendingEmails': set([])}, 'foo': {}}" ]
 
   // Transitions
   0 -> 1 [ label="Initialize()", tooltip="Initialize()" ]
-  1 -> 2 [ label="Recv('OleBrumm',)/'pending'", tooltip="Recv('OleBrumm',)/'pending'" ]
-  1 -> 3 [ label="Recv('VinniPuhh',)/'pending'", tooltip="Recv('VinniPuhh',)/'pending'" ]
-  2 -> 4 [ label="Recv('OleBrumm',)/'activate'", tooltip="Recv('OleBrumm',)/'activate'" ]
-  2 -> 5 [ label="Recv('VinniPuhh',)/'pending'", tooltip="Recv('VinniPuhh',)/'pending'" ]
-  3 -> 6 [ label="Recv('VinniPuhh',)/'activate'", tooltip="Recv('VinniPuhh',)/'activate'" ]
-  3 -> 7 [ label="Recv('OleBrumm',)/'pending'", tooltip="Recv('OleBrumm',)/'pending'" ]
-  4 -> 8 [ label="Recv('VinniPuhh',)/'pending'", tooltip="Recv('VinniPuhh',)/'pending'" ]
-  5 -> 8 [ label="Recv('OleBrumm',)/'activate'", tooltip="Recv('OleBrumm',)/'activate'" ]
-  5 -> 9 [ label="Recv('VinniPuhh',)/'activate'", tooltip="Recv('VinniPuhh',)/'activate'" ]
-  6 -> 9 [ label="Recv('OleBrumm',)/'pending'", tooltip="Recv('OleBrumm',)/'pending'" ]
-  7 -> 8 [ label="Recv('OleBrumm',)/'activate'", tooltip="Recv('OleBrumm',)/'activate'" ]
-  7 -> 9 [ label="Recv('VinniPuhh',)/'activate'", tooltip="Recv('VinniPuhh',)/'activate'" ]
-  8 -> 10 [ label="Recv('VinniPuhh',)/'activate'", tooltip="Recv('VinniPuhh',)/'activate'" ]
-  9 -> 11 [ label="Recv('OleBrumm',)/'activate'", tooltip="Recv('OleBrumm',)/'activate'" ]
+  0 -> 0 [ label="GET()", tooltip="GET()" ]
+  1 -> 1 [ label="GET()", tooltip="GET()" ]
+  1 -> 2 [ label="Recv('VinniPuhh',)/'pending'", tooltip="Recv('VinniPuhh',)/'pending'" ]
+  2 -> 3 [ label="Recv('VinniPuhh',)/'activate'", tooltip="Recv('VinniPuhh',)/'activate'" ]
+  2 -> 2 [ label="GET()", tooltip="GET()" ]
+  3 -> 3 [ label="GET()", tooltip="GET()" ]
 }
