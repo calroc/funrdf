@@ -1,20 +1,19 @@
 
-# pma EmailSignupModel foo
-# 4 states, 7 transitions, 4 accepting states, 0 finished and 0 deadend states
+# pma EmailSignupModel
+# 4 states, 5 transitions, 4 accepting states, 1 finished and 0 deadend states
 
 # actions here are just labels, but must be symbols with __name__ attribute
 
 def Initialize(): pass
 def Recv(): pass
-def GET(): pass
 
 # states, key of each state here is its number in graph etc. below
 
 states = {
-  0 : {'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Inactive', 'pendingEmails': set([])}, 'foo': {}},
-  1 : {'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Running', 'pendingEmails': set([])}, 'foo': {}},
-  2 : {'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Running', 'pendingEmails': set(['VinniPuhh'])}, 'foo': {}},
-  3 : {'EmailSignupModel': {'activeEmails': set(['VinniPuhh']), 'mode': 'Running', 'pendingEmails': set([])}, 'foo': {}},
+  0 : {'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Inactive', 'pendingEmails': set([])}},
+  1 : {'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Running', 'pendingEmails': set([])}},
+  2 : {'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Running', 'pendingEmails': set(['VinniPuhh'])}},
+  3 : {'EmailSignupModel': {'activeEmails': set(['VinniPuhh']), 'mode': 'Running', 'pendingEmails': set([])}},
 }
 
 # initial state, accepting states, frontier states, deadend states
@@ -22,7 +21,7 @@ states = {
 initial = 0
 accepting = [0, 1, 2, 3]
 frontier = []
-finished = []
+finished = [3]
 deadend = []
 runstarts = [0]
 
@@ -30,10 +29,8 @@ runstarts = [0]
 
 graph = (
   (0, (Initialize, (), None), 1),
-  (0, (GET, (), None), 0),
-  (1, (GET, (), None), 1),
-  (1, (Recv, ('VinniPuhh',), 'pending'), 2),
-  (2, (Recv, ('VinniPuhh',), 'activate'), 3),
-  (2, (GET, (), None), 2),
-  (3, (GET, (), None), 3),
+  (1, (Recv, ('VinniPuhh', 'sign up'), 'pending'), 2),
+  (1, (Recv, ('VinniPuhh', 'confirm'), 'pending'), 2),
+  (2, (Recv, ('VinniPuhh', 'sign up'), 'activate'), 3),
+  (2, (Recv, ('VinniPuhh', 'confirm'), 'activate'), 3),
 )

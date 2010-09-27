@@ -2,20 +2,18 @@ digraph EmailSignupModelFSM {
 
   // Nodes
   0 [ style=filled, shape=ellipse, peripheries=2, fillcolor=lightgray,
-      tooltip="{'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Inactive', 'pendingEmails': set([])}, 'foo': {}}" ]
+      tooltip="{'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Inactive', 'pendingEmails': set([])}}" ]
   1 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Running', 'pendingEmails': set([])}, 'foo': {}}" ]
+      tooltip="{'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Running', 'pendingEmails': set([])}}" ]
   2 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Running', 'pendingEmails': set(['VinniPuhh'])}, 'foo': {}}" ]
-  3 [ style=filled, shape=ellipse, peripheries=2, fillcolor=white,
-      tooltip="{'EmailSignupModel': {'activeEmails': set(['VinniPuhh']), 'mode': 'Running', 'pendingEmails': set([])}, 'foo': {}}" ]
+      tooltip="{'EmailSignupModel': {'activeEmails': set([]), 'mode': 'Running', 'pendingEmails': set(['VinniPuhh'])}}" ]
+  3 [ style=filled, shape=ellipse, peripheries=2, fillcolor=lightgreen,
+      tooltip="{'EmailSignupModel': {'activeEmails': set(['VinniPuhh']), 'mode': 'Running', 'pendingEmails': set([])}}" ]
 
   // Transitions
   0 -> 1 [ label="Initialize()", tooltip="Initialize()" ]
-  0 -> 0 [ label="GET()", tooltip="GET()" ]
-  1 -> 1 [ label="GET()", tooltip="GET()" ]
-  1 -> 2 [ label="Recv('VinniPuhh',)/'pending'", tooltip="Recv('VinniPuhh',)/'pending'" ]
-  2 -> 3 [ label="Recv('VinniPuhh',)/'activate'", tooltip="Recv('VinniPuhh',)/'activate'" ]
-  2 -> 2 [ label="GET()", tooltip="GET()" ]
-  3 -> 3 [ label="GET()", tooltip="GET()" ]
+  1 -> 2 [ label="Recv('VinniPuhh', 'sign up')/'pending'", tooltip="Recv('VinniPuhh', 'sign up')/'pending'" ]
+  1 -> 2 [ label="Recv('VinniPuhh', 'confirm')/'pending'", tooltip="Recv('VinniPuhh', 'confirm')/'pending'" ]
+  2 -> 3 [ label="Recv('VinniPuhh', 'sign up')/'activate'", tooltip="Recv('VinniPuhh', 'sign up')/'activate'" ]
+  2 -> 3 [ label="Recv('VinniPuhh', 'confirm')/'activate'", tooltip="Recv('VinniPuhh', 'confirm')/'activate'" ]
 }
