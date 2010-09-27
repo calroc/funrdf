@@ -1,6 +1,6 @@
 
 # pma EmailSignupModel
-# 4 states, 5 transitions, 4 accepting states, 1 finished and 0 deadend states
+# 4 states, 3 transitions, 4 accepting states, 1 finished and 0 deadend states
 
 # actions here are just labels, but must be symbols with __name__ attribute
 
@@ -30,7 +30,5 @@ runstarts = [0]
 graph = (
   (0, (Initialize, (), None), 1),
   (1, (Recv, ('VinniPuhh', 'sign up'), 'pending'), 2),
-  (1, (Recv, ('VinniPuhh', 'confirm'), 'pending'), 2),
-  (2, (Recv, ('VinniPuhh', 'sign up'), 'activate'), 3),
   (2, (Recv, ('VinniPuhh', 'confirm'), 'activate'), 3),
 )

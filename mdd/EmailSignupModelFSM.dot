@@ -13,7 +13,5 @@ digraph EmailSignupModelFSM {
   // Transitions
   0 -> 1 [ label="Initialize()", tooltip="Initialize()" ]
   1 -> 2 [ label="Recv('VinniPuhh', 'sign up')/'pending'", tooltip="Recv('VinniPuhh', 'sign up')/'pending'" ]
-  1 -> 2 [ label="Recv('VinniPuhh', 'confirm')/'pending'", tooltip="Recv('VinniPuhh', 'confirm')/'pending'" ]
-  2 -> 3 [ label="Recv('VinniPuhh', 'sign up')/'activate'", tooltip="Recv('VinniPuhh', 'sign up')/'activate'" ]
   2 -> 3 [ label="Recv('VinniPuhh', 'confirm')/'activate'", tooltip="Recv('VinniPuhh', 'confirm')/'activate'" ]
 }

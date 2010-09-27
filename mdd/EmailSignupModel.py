@@ -7,6 +7,10 @@ PyModel model for an email signup process, based on the WebModel.py sample.
 INACTIVE = 'Inactive'
 RUNNING = 'Running'
 
+SIGNUP = 'sign up'
+CONFIRM = 'confirm'
+
+
 # State, with initial values
 
 mode = INACTIVE  # can't call it 'state', that has special meaning
@@ -37,7 +41,19 @@ def Recv(address, body):
   return 'pending'
 
 def RecvEnabled(address, body):
-  return mode == RUNNING and address not in activeEmails
+  return (
+    mode == RUNNING
+    and (
+      body == SIGNUP and
+      address not in activeEmails and
+      address not in pendingEmails
+      )
+    or (
+      body == CONFIRM and
+      address not in activeEmails and
+      address in pendingEmails
+      )
+    )
 
 
 ### Metadata
@@ -56,7 +72,7 @@ enablers = {
 # default domains
 
 users = ['VinniPuhh']
-messages = ['sign up', 'confirm']
+messages = [SIGNUP, CONFIRM]
 
 domains = {
   Recv: {
