@@ -6,6 +6,7 @@ PyModel model for an email signup process, based on the WebModel.py sample.
 
 INACTIVE = 'Inactive'
 RUNNING = 'Running'
+ERR = 'Error'
 
 SIGNUP = 'sign up'
 CONFIRM = 'confirm'
@@ -30,7 +31,7 @@ def InitializeEnabled():
 
 
 def Recv(address, body):
-  global pendingEmails
+  global pendingEmails, activeEmails
 
   if address in pendingEmails:
     pendingEmails.remove(address)
@@ -55,16 +56,51 @@ def RecvEnabled(address, body):
       )
     )
 
+def Err(address, body):
+  global pendingEmails, activeEmails, mode
+  pendingEmails.discard(address)
+  activeEmails.discard(address)
+  mode = ERR
+
+def ErrEnabled(address, body):
+  return (
+    mode == RUNNING
+    and (
+      ( body == SIGNUP and (
+          address in pendingEmails or
+          address in activeEmails
+          )
+        )
+      or (
+        body == CONFIRM and
+        address not in pendingEmails
+        )
+      )
+    )
+
+
+def Report():
+  global mode
+  mode = INACTIVE
+
+def ReportEnabled():
+  return mode == ERR
+
+
+
+
 
 ### Metadata
 
 state = ('mode', 'pendingEmails', 'activeEmails')
 
-actions = (Initialize, Recv)
+actions = (Initialize, Recv, Err, Report)
 
 enablers = {
   Initialize: (InitializeEnabled,),
   Recv: (RecvEnabled,),
+  Err: (ErrEnabled,),
+  Report: (ReportEnabled,),
   }
 
 # cleanup = (Logout,)
@@ -76,6 +112,10 @@ messages = [SIGNUP, CONFIRM]
 
 domains = {
   Recv: {
+    'address': users,
+    'body': messages,
+    },
+  Err: {
     'address': users,
     'body': messages,
     },
