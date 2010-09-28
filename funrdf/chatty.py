@@ -2,7 +2,7 @@ import logging, traceback
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.xmpp_handlers import CommandHandler
 from google.appengine.ext.webapp.util import run_wsgi_app
-from models import knowFact
+from models import Fact
 
 
 XMPP_LOG = logging.getLogger("XMPP")
@@ -35,7 +35,7 @@ class XMPPHandler(CommandHandler):
             reply = 'know: %s => %s => %s' % (subject, predicate, object_)
             XMPP_LOG.debug('attempting to ' + reply)
             try:
-                knowFact(subject, predicate, object_)
+                Fact.know(subject, predicate, object_)
             except:
                 XMPP_LOG.exception(reply)
                 reply += '\n' + traceback.format_exc()
