@@ -25,6 +25,97 @@ for f in results:
 
 
 
+def treeSubset(triples, subject, predicate, res=None):
+    '''
+    Return a set of triples that are the tree from subject and linked by
+    the predicate relation.
+    '''
+    if res is None:
+        res = set()
+
+    # Find all objects of the subject, predicate relation.
+    more = set(
+        (s, p, o)
+        for s, p, o in triples
+        if s == subject and p == predicate
+        )
+
+    for spo in more:
+        if spo not in res:
+            res.add(spo)
+            treeSubset(triples, spo[2], predicate, res)
+
+    return res
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def subsets(triples, subject, predicate, res=None, seen=None):
+    '''
+    Return a set of triples that are the tree from subject and linked by
+    the predicate relation.
+    '''
+    if res is None: res = dict()
+    if seen is None: seen = set()
+
+    seen.add(subject)
+
+    # Find all objects of the subject, predicate relation.
+    more = set(
+        o
+        for s, p, o in triples
+        if s == subject and p == predicate
+        ) - seen
+
+    d = res[subject] = int(bool(more)) or {}
+
+    for o in more:
+        if o not in res:
+            subsets(triples, o, predicate, d, seen)
+
+    return res
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 from google.appengine.ext.db import Key
