@@ -14,9 +14,11 @@ handlers:
   mime_type: image/svg+xml
 - url: /static
   static_dir: static
+- url: /xerblin
+  script: xerb.py
+  login: required
 - url: .*
   script: main.py
-
 
 inbound_services:
 - xmpp_message
