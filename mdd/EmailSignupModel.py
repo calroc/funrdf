@@ -45,14 +45,14 @@ def RecvEnabled(address, body):
   return (
     mode == RUNNING
     and ((
-      body == SIGNUP and
-      address not in activeEmails and
-      address not in pendingEmails
-      )
-    or (
-      body == CONFIRM and
-      address not in activeEmails and
-      address in pendingEmails
+        body == SIGNUP and
+        address not in activeEmails and
+        address not in pendingEmails
+        )
+      or (
+        body == CONFIRM and
+        address not in activeEmails and
+        address in pendingEmails
       ))
     )
 
