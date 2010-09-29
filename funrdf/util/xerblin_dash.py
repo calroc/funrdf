@@ -1,7 +1,6 @@
 from xerblin.library import words
 from webout import *
 
-title = 'Fun with RDF'
 
 def word2html(name, doc):
     head = HEAD(TITLE(name))
@@ -15,7 +14,8 @@ def word2html(name, doc):
     return str(HTML(head + body))
 
 
-for name, word in words:
-    with open(name + '.html', 'w') as f:
-        print >> f, word2html(name, word.__doc__)
+if __name__ == '__main__':
+    for name, word in words:
+        with open(name + '.html', 'w') as f:
+            print >> f, word2html(name, word.__doc__)
 
