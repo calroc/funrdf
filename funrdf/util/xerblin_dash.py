@@ -1,4 +1,3 @@
-from xerblin.library import words
 from webout import *
 
 
@@ -15,6 +14,7 @@ def word2html(name, doc):
 
 
 if __name__ == '__main__':
+    from xerblin.library import words
     for name, word in words:
         with open(name + '.html', 'w') as f:
             print >> f, word2html(name, word.__doc__)
