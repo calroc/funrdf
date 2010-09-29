@@ -9,9 +9,17 @@ class MainHandler(webapp.RequestHandler):
         self.response.out.write(html)
 
 
+class MachineHandler(webapp.RequestHandler):
+    def get(self):
+        self.response.out.write(html)
+
+
 def main():
     application = webapp.WSGIApplication(
-        [('/', MainHandler)],
+        [
+            ('/', MainHandler),
+            ('/mech', MachineHandler),
+            ],
         debug=True,
         )
     util.run_wsgi_app(application)
