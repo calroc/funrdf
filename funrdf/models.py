@@ -1,6 +1,31 @@
+import pickle, uuid
 from google.appengine.ext import db
 from util import key_name_of, KeyNameCollisionError
 
+
+class StateStorage(db.Model):
+    data = db.BlobProperty()
+    created = db.DateTimeProperty(auto_now_add=True)
+
+    @classmethod
+    def fetch(class_, user_id, uuid):
+        key = db.Key.from_path('StateStorage', user_id + uuid)
+        state = db.get(key)
+        if state:
+            return pickle.loads(state.data.decode('zlib'))
+
+    @classmethod
+    def store(class_, user_id, state):
+        u = uuid.uuid4().hex
+        key_name = user_id + u
+        state = pickle.dumps(state).encode('zlib')
+        stored_state = class_.get_or_insert(key_name, data=state)
+        if stored_state.data != state:
+            raise KeyNameCollisionError(
+                'UUID collision for: %s - %s' %
+                (user_id, u)
+                )
+        return u
 
 class URIref(db.Model):
     value = db.StringProperty(required=True)
