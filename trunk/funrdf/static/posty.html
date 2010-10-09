@@ -2,38 +2,7 @@
 <head>
 <title>Run command against state 9386a06940f848eaab0d8e3b7a0dbc46</title>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-<script type="text/javascript" >
-
-$(function() {
-  $('#cake').submit(function() {
-    action_url = $("#cake")[0].action;
-	action_url = action_url.substr(-32);
-    cmd = $("#command")[0].value;
-    foo(action_url, cmd);
-    return false;
-  });
-});
-
-function renderState(data) {
-  alert(data);
-}
-
-function foo(key, cmd){
-$.post(
-  "/xerblin/" + key, // 9386a06940f848eaab0d8e3b7a0dbc46"
-  {command:cmd}, //"23 14 add"
-  function(data, textStatus, xhr) {
-    if (xhr.status == "201") {
-      var next_state_url = xhr.getResponseHeader("Content-Location");
-      $("form")[0].action = "/xerblin/" + next_state_url;
-      renderState(data);
-    }
-  }, 
-  'json'
-  );
-}
-
-</script>
+<script type="text/javascript" src="posty.js"></script>
 </head>
 <body>
 <h1>Run command against state 9386a06940f848eaab0d8e3b7a0dbc46</h1>
