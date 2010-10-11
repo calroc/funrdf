@@ -1,18 +1,11 @@
 #!/usr/bin/env python
-import pickle
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 from google.appengine.api import users
 from models import StateStorage
 from util import jsonDumps
 from util.homepage import html
-from xerblin.btree import fillTree, items, get
-from xerblin.library import words
 from xerblin.base import interpret
-
-##k = StateStorage.store('1', (1, 2, 3))
-##print k
-##print 
 
 
 class MainHandler(webapp.RequestHandler):
@@ -32,21 +25,13 @@ class MainHandler(webapp.RequestHandler):
 
         command = self.request.get("command").split()
         next_state = interpret(state, command)
-        state_key = self.saveNextState(user, next_state)
+        state_key = StateStorage.store(user, next_state)
 
         message = jsonDumps(next_state)
         self.response.set_status(201)
         self.response.headers['Content-Location'] = state_key
         self.response.headers['Content-Type'] = 'application/json'
         self.response.out.write(message)
-
-    def saveNextState(self, user, next_state):
-        user_id = user.user_id()
-        return StateStorage.store(user_id, next_state)
-
-    def getState(self, user, state_key):
-        user_id = user.user_id()
-        return StateStorage.fetch(user_id, state_key)
 
     def _preamble(self, state_key):
 
@@ -59,20 +44,19 @@ class MainHandler(webapp.RequestHandler):
         assert user # This should be guarded in app.yaml.
 
         # Retrieve state.
-        state = self.getState(user, state_key)
+        state = StateStorage.fetch(user, state_key)
         if not state:
-            self._noStateError(state_key, user.user_id())
+            self._noStateError(state_key)
             return None, None
 
         return user, state
 
-    def _noStateError(self, state_key, uid):
+    def _noStateError(self, state_key):
         self.error(404)
         self.response.out.write(
             '404 <br>\n'
-            'No such state: %s <br>\n'
-            'User id: %s' %
-            (state_key, uid)
+            'No such state: %s'
+            % (state_key,)
             )
 
 

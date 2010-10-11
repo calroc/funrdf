@@ -6,26 +6,38 @@ from util import key_name_of, KeyNameCollisionError
 class StateStorage(db.Model):
     data = db.BlobProperty()
     created = db.DateTimeProperty(auto_now_add=True)
+    whose = db.UserProperty()
 
     @classmethod
-    def fetch(class_, user_id, uuid):
-        key = db.Key.from_path('StateStorage', user_id + uuid)
+    def fetch(class_, user, uuid):
+        key_name = class_._makeKey(user, uuid)
+        key = db.Key.from_path(class_.__name__, key_name)
         state = db.get(key)
         if state:
             return pickle.loads(state.data.decode('zlib'))
 
     @classmethod
-    def store(class_, user_id, state):
+    def store(class_, user, state):
         u = uuid.uuid4().hex
-        key_name = user_id + u
+        key_name = class_._makeKey(user, u)
         state = pickle.dumps(state).encode('zlib')
-        stored_state = class_.get_or_insert(key_name, data=state)
+        stored_state = class_.get_or_insert(
+            key_name,
+            data=state,
+            whose=user,
+            )
         if stored_state.data != state:
             raise KeyNameCollisionError(
-                'UUID collision for: %s - %s' %
-                (user_id, u)
+                'key_name collision for: %s'
+                % (key_name,)
                 )
         return u
+
+    @classmethod
+    def _makeKey(class_, user, uuid):
+        user_id = user.user_id()
+        return user_id + uuid
+
 
 class URIref(db.Model):
     value = db.StringProperty(required=True)
